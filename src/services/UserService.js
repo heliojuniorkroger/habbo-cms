@@ -11,7 +11,7 @@ export default class {
         window.sessionStorage.setItem('user', JSON.stringify(user))
         store.dispatch(userActions.set(user))
     }
-    static facebookLogin = async (user) => {
+    static async facebookLogin(user) {
         return new Promise(async (resolve, reject) => {
             try {
                 const response = await axios.post(`${API_URL}/authentication/facebook`, user)

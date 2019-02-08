@@ -16,7 +16,7 @@ class HabboClient extends Component {
     componentWillReceiveProps(props) {
         if (!this.props.user && props.user) this.getClientUrl(props.user.id)
     }
-    getClientUrl = async id => {
+    async getClientUrl(id) {
         try {
             const response = await axios.get(`${API_URL}/client/url`, { headers: { 'client-id': id } })
             this.setState({ clientUrl: response.data.url })

@@ -1,7 +1,12 @@
 import emailValidator from 'email-validator'
+import passwordStrength from 'password-strength'
 
 const required = value => {
     if (!value) return 'Este campo é obrigatório.'
+}
+
+const password = value => {
+    if (passwordStrength(value).strength === 'simple') return 'Password strength failed.'
 }
 
 const passwordsMatch = (value, allValues) => {
@@ -14,6 +19,7 @@ const email = value => {
 
 export {
     required,
+    password,
     passwordsMatch,
     email
 }

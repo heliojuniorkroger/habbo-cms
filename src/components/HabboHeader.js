@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from 'react'
 import { connect } from 'react-redux'
+import { Modal } from 'react-bootstrap'
 import { Link, withRouter } from 'react-router-dom'
 import HabboLoginFrom from './HabboLoginForm'
 import HabboUserMenu from './HabboUserMenu'
@@ -15,6 +16,13 @@ class HabboHeaderWrapper extends Component {
 }
 
 class HabboHeader extends Component {
+    constructor() {
+        super()
+        this.state = {
+            showLoginModal: false,
+            claimPasswordModalOpened: false
+        }
+    }
     render() {
         const useLargeHeader = this.props.location.pathname === '/' && !this.props.user
         let stickyHeader
@@ -57,11 +65,27 @@ class HabboHeader extends Component {
             )
         } else {
             if (!useLargeHeader) loginButton = (
-                <div className="header__aside">
-                    <button className="header__login__button">
-                        <span className="header__login__icon">Login</span>
-                    </button>
-                </div>
+                <Fragment>
+                    <Modal
+                        show={this.state.showLoginModal}
+                        onHide={() => this.setState({ showLoginModal: false })}
+                        backdrop={!this.state.claimPasswordModalOpened}
+                    >
+                        <button className="modal__close" onClick={() => this.setState({ showLoginModal: false })} />
+                        <h3 className="modal__title">Login</h3>
+                        <div className="modal__content">
+                            <HabboLoginFrom
+                                openedClaimPasswordModal={() => this.setState({ claimPasswordModalOpened: true })}
+                                closedClaimPasswordModal={() => this.setState({ claimPasswordModalOpened: false })}
+                            />
+                        </div>
+                    </Modal>
+                    <div className="header__aside">
+                        <button className="header__login__button" onClick={() => this.setState({ showLoginModal: true })}>
+                            <span className="header__login__icon">Login</span>
+                        </button>
+                    </div>
+                </Fragment>
             )
         }
         return (
