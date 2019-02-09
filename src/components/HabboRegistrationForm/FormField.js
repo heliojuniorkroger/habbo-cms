@@ -31,7 +31,7 @@ export default class extends Component {
         let popover
         let toggleMask
         const strengthOptions = getPasswordStrength()
-        const showError = this.props.meta.touched && this.props.meta.error
+        const showError = this.props.meta.touched && this.props.meta.invalid
         const showStrengthMeter = this.props.meta.touched && this.props.input.name === 'passwordNew' && this.props.meta.error !== 'Este campo é obrigatório.'
         const strengthMeter = (
             <habbo-password-strength>
