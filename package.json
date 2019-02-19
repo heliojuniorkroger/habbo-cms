@@ -5,8 +5,10 @@
   "dependencies": {
     "axios": "^0.18.0",
     "email-validator": "^2.0.4",
+    "express": "^4.16.4",
+    "express-http-proxy": "^1.5.1",
+    "handlebars": "^4.1.0",
     "moment": "^2.22.2",
-    "password-strength": "0.0.1",
     "react": "^16.4.1",
     "react-bootstrap": "^0.32.4",
     "react-document-title": "^2.0.3",
@@ -17,10 +19,11 @@
     "react-router-dom": "^4.3.1",
     "react-scripts": "1.1.4",
     "redux": "^4.0.0",
-    "redux-form": "^7.4.2"
+    "redux-form": "^7.4.2",
+    "zxcvbn": "^4.4.2"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "concurrently \"react-scripts start\" \"nodemon index --quiet\"",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"

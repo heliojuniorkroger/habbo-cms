@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script type="text/javascript" src="//images.habbo.com/swfobject/2.3b/swfobject.js"></script>
+        <link rel="stylesheet" type="text/css" href="https://images.habbo.com/game-data-server-static//hotel.731d1960.css">
+        {{#if SSO_TICKET}}
+        <script type="text/javascript">
+            var flashvars = {
+                "external.texts.txt":"{{ EXTERNAL_TEXTS_TXT }}",
+                "connection.info.port":"{{ CONNECTION_INFO_PORT }}",
+                "furnidata.load.url":"{{ FURNIDATA_LOAD_URL }}",
+                "external.variables.txt":"{{ EXTERNAL_VARIABLES_TXT }}",
+                "client.allow.cross.domain":"1",
+                "url.prefix":"https:\/\/www.habbo.com.br",
+                "external.override.texts.txt":"{{ EXTERNAL_OVERRIDE_TEXTS_TXT }}",
+                "supersonic_custom_css":"https:\/\/images.habbo.com\/game-data-server-static\/\/.\/hotel.731d1960.css",
+                "external.figurepartlist.txt":"{{ EXTERNAL_FIGUREPARTLIST_TXT }}",
+                "flash.client.origin":"popup",
+                "client.starting":"Por favor aguarde! O Habbo est\u00E1 carregando...",
+                "processlog.enabled":"1",
+                "has.identity":"1",
+                "avatareditor.promohabbos":"https:\/\/www.habbo.com.br\/api\/public\/lists\/hotlooks",
+                "productdata.load.url":"{{ PRODUCTDATA_LOAD_URL }}",
+                "client.starting.revolving":"Quando voc\u00EA menos esperar...terminaremos de carregar...\/Carregando mensagem divertida! Por favor espere.\/Voc\u00EA quer batatas fritas para acompanhar?\/Siga o pato amarelo.\/O tempo \u00E9 apenas uma ilus\u00E3o.\/J\u00E1 chegamos?!\/Eu gosto da sua camiseta.\/Olhe para um lado. Olhe para o outro. Pisque duas vezes. Pronto!\/N\u00E3o \u00E9 voc\u00EA, sou eu.\/Shhh! Estou tentando pensar aqui.\/Carregando o universo de pixels.",
+                "external.override.variables.txt":"{{ EXTERNAL_OVERRIDE_VARIABLES_TXT }}",
+                "spaweb":"1",
+                "supersonic_application_key":"2c63c535",
+                "connection.info.host":"{{ CONNECTION_INFO_HOST }}",
+                "sso.ticket":"{{ SSO_TICKET }}",
+                "client.notify.cross.domain":"0",
+                "account_id":"82728452",
+                "flash.client.url":"{{ FLASH_CLIENT_URL }}",
+                "unique_habbo_id":"hhbr-350f6525c8a7ed9366814c42d0973aff",
+            };
+        </script>
+        <script type="text/javascript">
+            var params = {
+                "base" : "{{ BASE }}",
+                "allowScriptAccess" : "always",
+                "menu" : "false",
+                "wmode": "opaque"
+            };
+            swfobject.embedSWF('{{ HABBO_SWF }}', 'flash-container', '100%', '100%', '11.1.0', '//images.habbo.com/habboweb/63_1d5d8853040f30be0cc82355679bba7c/11243/web-gallery/flash/expressInstall.swf', flashvars, params, null, null);
+        </script>
+        {{/if}}
+    </head>
+    <body>
+        {{#if SSO_TICKET}}
+        <div id="client-ui">
+            <div id="flash-wrapper">
+                <object width="100%" height="100%" id="flash-container" type="application/x-shockwave-flash" data="{{ HABBO_SWF }}" style="visibility: visible;">
+            </div>
+        </div>
+        {{else}}
+        <p>My Mustache tells me you tried something funny. Not a hacker, arent you!</p>
+        <script type="text/javascript">
+            window.FlashExternalInterface.disconnect();
+        </script>
+        {{/if}}
+    </body>
+</html>

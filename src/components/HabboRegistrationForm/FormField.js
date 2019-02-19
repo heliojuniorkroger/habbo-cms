@@ -1,36 +1,48 @@
 import React, { Component } from 'react'
-import passwordStrength from 'password-strength'
+import zxcvbn from 'zxcvbn'
 
 export default class extends Component {
     getPasswordStrength() {
-        const strength = passwordStrength(this.props.input.value)
-        switch (strength.strength) {
-            case 'simple':
+        const result = zxcvbn(this.props.input.value)
+        switch (result.score) {
+            case 0:
                 return {
                     label: 'Falhou',
                     width: '10%',
                     indicatorClass: 'password-strength__indicator--fail'
                 }
-            case 'medium':
-            return {
-                label: 'Razoável',
-                width: '50%',
-                indicatorClass: 'password-strength__indicator--fair'
-            }
-            case 'strong':
-            return {
-                label: 'Bom',
-                width: '100%',
-                indicatorClass: 'password-strength__indicator--good'
-            }
+            case 1:
+                return {
+                    label: 'Fraco',
+                    width: '30%',
+                    indicatorClass: 'password-strength__indicator--poor'
+                }
+            case 2:
+                return {
+                    label: 'Razoável',
+                    width: '50%',
+                    indicatorClass: 'password-strength__indicator--fair'
+                }
+            case 3:
+                return {
+                    label: 'OK',
+                    width: '70%',
+                    indicatorClass: 'password-strength__indicator--ok'
+                }
+            case 4:
+                return {
+                    label: 'Bom',
+                    width: '100%',
+                    indicatorClass: 'password-strength__indicator--good'
+                }
             default:
-                return null
+                return {}
         }
     }
     render() {
         let popover
         let toggleMask
-        const strengthOptions = getPasswordStrength()
+        const strengthOptions = this.getPasswordStrength()
         const showError = this.props.meta.touched && this.props.meta.invalid
         const showStrengthMeter = this.props.meta.touched && this.props.input.name === 'passwordNew' && this.props.meta.error !== 'Este campo é obrigatório.'
         const strengthMeter = (
